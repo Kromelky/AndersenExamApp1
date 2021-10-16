@@ -1,6 +1,4 @@
-package helloworld;
-
-import java.util.Arrays;
+package main.java.helloworld;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

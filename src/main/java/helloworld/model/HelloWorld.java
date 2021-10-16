@@ -1,4 +1,4 @@
-package helloworld.model;
+package main.java.helloworld.model;
 
 public class HelloWorld {
 
