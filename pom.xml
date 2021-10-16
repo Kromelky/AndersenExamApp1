@@ -17,7 +17,7 @@
 
 	<groupId>com.helloworld</groupId>
 	<artifactId>helloworld</artifactId>
-	<version>0.0.1-${BUILD_NUMBER}</version>
+	<version>0.0.1-${env.BUILD_NUMBER}</version>
 	<packaging>jar</packaging>
 
 	<parent>
@@ -31,6 +31,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
+
 	</properties>
 
 
