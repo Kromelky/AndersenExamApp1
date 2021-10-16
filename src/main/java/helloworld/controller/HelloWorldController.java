@@ -1,9 +1,6 @@
-package helloworld.controller;
+package main.java.helloworld.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import helloworld.model.HelloWorld;
+import main.java.helloworld.model.HelloWorld;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
