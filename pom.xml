@@ -5,10 +5,12 @@
 
 	<profiles>
     	<profile>
-        	<activation>
+			<id>1</id>
+			<activation>
             	<activeByDefault>true</activeByDefault>
         	</activation>
         	<properties>
+				<!--suppress UnresolvedMavenProperty -->
 				<build.number>${env.BUILD_NUMBER}</build.number>
         	</properties>
     	</profile>
