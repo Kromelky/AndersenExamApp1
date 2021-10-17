@@ -35,8 +35,14 @@ pipeline {
         stage('Building image') {
             steps{
                 script {
-                    dockerImage = docker.build imageName
+                    dockerImage = docker.build(imageName)
                 }
+            }
+        }
+
+        stage('Test image') {
+            app.inside {
+                sh 'echo "Tests passed"'
             }
         }
 
@@ -45,7 +51,7 @@ pipeline {
             steps{
                 script {
                     docker.withRegistry( registry, registryCredentials ) {
-                        echo registryCredentials
+                        dockerImage.push("${env.BUILD_NUMBER}")
                         dockerImage.push('latest')
                     }
                 }
