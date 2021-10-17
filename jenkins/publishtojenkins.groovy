@@ -55,7 +55,7 @@ pipeline {
         stage('Uploading to Nexus') {
             steps{
                 script {
-                    docker.withRegistry('http://' + registry, nexus_login ) {
+                    docker.withRegistry('http://' + registry, registryCredentials ) {
                         dockerImage.push("${env.BUILD_NUMBER}")
                         dockerImage.push('latest')
                     }
