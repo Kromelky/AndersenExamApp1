@@ -4,11 +4,12 @@ pipeline {
 
     environment {
         registryCredentials = "nexus-jenkins-acc"
-        registry = "http://10.0.0.179:8085/repository/docker/"
+        registry = "10.0.0.179:8085/"
         repo = "https://github.com/Kromelky/AndersenExamApp1"
         imageName = 'kromelky/application1'
         gitHubAuthId = 'git-kromelky-token'
-        nexus_login = "jenkins"
+        nexus_login = "nexus-acc"
+        dockerImage  = ''
     }
 
     // Getting from repository
@@ -54,7 +55,7 @@ pipeline {
         stage('Uploading to Nexus') {
             steps{
                 script {
-                    docker.withRegistry( registry, nexus_login ) {
+                    docker.withRegistry('http://' + registry, nexus_login ) {
                         dockerImage.push("${env.BUILD_NUMBER}")
                         dockerImage.push('latest')
                     }
