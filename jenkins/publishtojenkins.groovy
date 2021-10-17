@@ -41,22 +41,6 @@ pipeline {
             }
         }
 
-        // Starting image
-        stage('Docker Run') {
-            steps{
-                script {
-                    sh 'docker run -d -p 8080:8080 --rm --name imageName ' + registry + imageName
-                }
-            }
-        }
-
-        stage('stop previous containers') {
-            steps {
-                sh 'docker ps -f name=myphpcontainer -q | xargs --no-run-if-empty docker container stop'
-                sh 'docker container ls -a -fname=myphpcontainer -q | xargs -r docker container rm'
-            }
-        }
-
          // Uploading Docker images into Nexus Registry
         stage('Uploading to Nexus') {
             steps{
@@ -67,7 +51,5 @@ pipeline {
                 }
             }
         }
-
-
     }
 }
