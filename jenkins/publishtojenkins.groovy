@@ -41,7 +41,7 @@ pipeline {
         }
 
         stage('Test image') {
-            app.inside {
+            dockerImage.inside {
                 sh 'echo "Tests passed"'
             }
         }
@@ -50,7 +50,7 @@ pipeline {
         stage('Uploading to Nexus') {
             steps{
                 script {
-                    docker.withRegistry( registry, registryCredentials ) {
+                    docker.withRegistry( registry, nexus_login ) {
                         dockerImage.push("${env.BUILD_NUMBER}")
                         dockerImage.push('latest')
                     }
