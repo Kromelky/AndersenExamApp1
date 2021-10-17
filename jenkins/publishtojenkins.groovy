@@ -66,10 +66,16 @@ pipeline {
         //
         stage ('Invoke_deployment_pipeline') {
             steps {
-                build job: 'DeployApplications', parameters: [
-                string(name: 'env', value: "dev"),
-                string(name: 'image', value: imageName)
-                ]
+                try {
+                    build job: 'DeployApplications', parameters: [
+                        string(name: 'env', value: "dev"),
+                        string(name: 'image', value: imageName)
+                    ]
+                } catch (err) {
+                    echo err.getMessage()
+                }
+
+
             }
         }
     }
