@@ -3,11 +3,10 @@ pipeline {
     agent any
 
     environment {
-        imageName = "myphpapp"
         registryCredentials = "nexus-jenkins-acc"
-        registry = "10.0.0.179:8085/"
+        registry = "http://10.0.0.179:8085/repository/docker/"
         repo = "https://github.com/Kromelky/AndersenExamApp1"
-        dockerImage = 'kromelky/application1'
+        imageName = 'kromelky/application1'
         gitHubAuthId = 'git-kromelky-token'
         nexus_login = "jenkins"
     }
@@ -45,7 +44,8 @@ pipeline {
         stage('Uploading to Nexus') {
             steps{
                 script {
-                    docker.withRegistry( 'http://'+registry, registryCredentials ) {
+                    docker.withRegistry( registry, registryCredentials ) {
+                        echo registryCredentials
                         dockerImage.push('latest')
                     }
                 }
