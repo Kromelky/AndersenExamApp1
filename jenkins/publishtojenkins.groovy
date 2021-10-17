@@ -4,7 +4,7 @@ pipeline {
 
     environment {
         imageName = "myphpapp"
-        registryCredentials = "jenkins"
+        registryCredentials = "nexus-jenkins-acc"
         registry = "10.0.0.179:8085/"
         repo = "https://github.com/Kromelky/AndersenExamApp1"
         dockerImage = 'kromelky/application1'
