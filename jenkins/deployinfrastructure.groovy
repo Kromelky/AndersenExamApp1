@@ -11,7 +11,7 @@ pipeline {
         nexus_login = "nexus-acc"
     }
 
-    // Getting from repository
+
     stages {
         stage('Init terraform') {
             steps {
@@ -24,12 +24,19 @@ pipeline {
         stage('Plan terraform') {
             steps {
                 dir("terraform"){
-
-                    sh "terraform plan"
+                    withCredentials([usernamePassword(credentialsId: 'registryCredentials', passwordVariable: 'C_PASS', usernameVariable: 'C_USER')]) {
+                        sh "terraform plan -var-file='tfvars/dev.tfvars' -var 'docker_pass=${C_PASS}' -var 'docker_login=${C_USER}'"
+                    }
                 }
             }
         }
 
-
+        stage('Apply terraform') {
+            steps {
+                dir("terraform"){
+                    sh " terraform apply -var-file=\"tfvars/dev.tfvars\" -auto-approve"
+                }
+            }
+        }
     }
 }
