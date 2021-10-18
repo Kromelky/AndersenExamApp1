@@ -8,7 +8,7 @@ resource "aws_instance" "webserver" {
     subnet_id  = aws_subnet.public[count.index].id
     associate_public_ip_address = true
     vpc_security_group_ids = [aws_security_group.sg_allow_web.id, aws_security_group.sg_allow_ssh.id]
-    user_data = "${data.template_file.docker_templ.rendered}"
+    user_data = "${data.template_file.docker_temple.rendered}"
     tags = {
       Name = "${var.environment} ${var.build_number} Web Server ${ count.index + 1}"
     }
@@ -18,7 +18,7 @@ resource "aws_instance" "webserver" {
   }
 }
 
-data "template_file" "docker_templ" {
+data "template_file" "docker_temple" {
   template = file(var.template_script_path)
   vars = {
     imageName = var.docker_image_name

@@ -14,7 +14,7 @@ variable "instance_count" {
 
 variable "template_script_path" {
     type    = string
-    default = "/template/WebServersInit.sh"
+    default = "template/WebServersInit.sh"
     description = "Path for deploy template"
 }
 
