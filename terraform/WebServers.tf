@@ -19,7 +19,7 @@ resource "aws_instance" "webserver" {
 }
 
 data "template_file" "docker_templ" {
-  template = file("/template/WebServersInit.sh")
+  template = file(var.template_script_path)
   vars = {
     imageName = var.docker_image_name
     docker_login = var.docker_login
