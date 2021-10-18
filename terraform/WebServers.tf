@@ -9,9 +9,9 @@ resource "aws_instance" "webserver" {
     associate_public_ip_address = true
     vpc_security_group_ids = [aws_security_group.sg_allow_web.id, aws_security_group.sg_allow_ssh.id]
     user_data = templatefile("/template/WebServersInit.sh", {
-      imageName = var.docker_image_name
-      docker_login = var.docker_login
-      docker_pass = var.docker_pass
+      imageName = "${var.docker_image_name}"
+      docker_login = "${var.docker_login}"
+      docker_pass = "${var.docker_pass}"
     })
   
   tags = {
