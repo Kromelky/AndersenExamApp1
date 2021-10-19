@@ -11,6 +11,11 @@ variable "instance_count" {
     description = "Instances count"
 }
 
+variable "imageName" {
+    type    = string
+    default = "kromelky/application"
+    description = "Image file"
+}
 
 variable "template_script_path" {
     type    = string
