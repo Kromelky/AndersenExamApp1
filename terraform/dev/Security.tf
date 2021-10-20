@@ -1,7 +1,7 @@
 resource "aws_security_group" "sg_allow_ssh" {
-  name        = "ssh"
+  name_prefix        = "ssh"
   description = "Allow ssh inbound traffic"
-  vpc_id      = aws_vpc.main.id
+  vpc_id      = data.aws_vpc.main.id
 
   ingress {
       description      = "SSH from VPC"
@@ -9,6 +9,7 @@ resource "aws_security_group" "sg_allow_ssh" {
       to_port          = 22
       protocol         = "tcp"
       cidr_blocks      = ["0.0.0.0/0"]
+
     }
   
 
@@ -26,9 +27,9 @@ resource "aws_security_group" "sg_allow_ssh" {
 }
 
 resource "aws_security_group" "sg_allow_web" {
-  name        = "allow_http"
+  name_prefix        = "allow_http"
   description = "Allow HTTP inbound traffic"
-  vpc_id      = aws_vpc.main.id
+  vpc_id      = data.aws_vpc.main.id
 
   ingress {  
       description      = "HTTP from VPC"
