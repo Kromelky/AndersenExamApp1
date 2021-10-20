@@ -33,6 +33,7 @@ pipeline {
             }
         }
 
+        //Deploy server
         stage('Apply terraform') {
             steps {
                 dir("terraform/dev"){
