@@ -12,7 +12,6 @@ pipeline {
         application_label = "2"
     }
 
-
     stages {
         stage('Init terraform') {
             steps {
@@ -21,7 +20,6 @@ pipeline {
                 }
             }
         }
-
 
         stage('Plan terraform') {
             steps {
