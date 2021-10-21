@@ -9,7 +9,7 @@ pipeline {
         imageName = 'kromelky/application1'
         gitHubAuthId = 'git-kromelky-token'
         nexus_login = "nexus-acc"
-        application_label = "2"
+        application_label = "1"
     }
 
     stages {
@@ -32,20 +32,11 @@ pipeline {
                         }
                         catch (Exception ex)
                         {
-                             if (ex.getMessage().contains("-migrate-state")){
                                 sh """
                                 terraform init -migrate-state
                                 terraform plan -var-file="tfvars/prod.tfvars" -var "docker_pass=${C_PASS}" -var "docker_login=${C_USER}" -var "imageName=${imageName}" -var "instance_label=${application_label}"
                                 """
-
-                            }
-                            else
-                            {
-                                throw ex
-                            }
                         }
-
-
                     }
                 }
             }
