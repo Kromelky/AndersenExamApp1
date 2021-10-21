@@ -25,17 +25,19 @@ pipeline {
             steps {
                 dir("terraform/prod"){
                     withCredentials([usernamePassword(credentialsId: registryCredentials, passwordVariable: 'C_PASS', usernameVariable: 'C_USER')]) {
-                        try {
-                            sh """
-                            terraform plan -var-file="tfvars/prod.tfvars" -var "docker_pass=${C_PASS}" -var "docker_login=${C_USER}" -var "imageName=${imageName}" -var "instance_label=${application_label}"
-                            """
-                        }
-                        catch (Exception ex)
-                        {
+                        script {
+                            try {
+                                sh """
+                                terraform plan -var-file="tfvars/prod.tfvars" -var "docker_pass=${C_PASS}" -var "docker_login=${C_USER}" -var "imageName=${imageName}" -var "instance_label=${application_label}"
+                                """
+                            }
+                            catch (Exception ex)
+                            {
                                 sh """
                                 terraform init -migrate-state
                                 terraform plan -var-file="tfvars/prod.tfvars" -var "docker_pass=${C_PASS}" -var "docker_login=${C_USER}" -var "imageName=${imageName}" -var "instance_label=${application_label}"
                                 """
+                            }
                         }
                     }
                 }
