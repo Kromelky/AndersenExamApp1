@@ -13,6 +13,7 @@ pipeline {
 
 
     stages {
+        when {expression { env.BRANCH_NAME == 'dev' } }
         stage('Init terraform') {
             steps {
                 dir("terraform/dev"){
