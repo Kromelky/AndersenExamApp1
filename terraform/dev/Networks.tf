@@ -13,17 +13,6 @@ data "aws_route_table" "rt" {
   }
 }
 
-
-resource "aws_vpc" "main" {
-  cidr_block       = var.vpc_cidr
-  instance_tenancy = var.tenancy
-  enable_dns_hostnames = var.enable_dns_support
-  enable_dns_support = var.enable_dns_hostnames
-  tags = {
-    Name = var.vpc_name
-  }
-}
-
 data "aws_availability_zones" "available" {
   state = "available"
 }
