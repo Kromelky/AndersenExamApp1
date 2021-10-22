@@ -10,6 +10,7 @@ pipeline {
         gitHubAuthId = 'git-kromelky-token'
         nexus_login = "nexus-acc"
         dockerImage  = ''
+        application_label = "1"
     }
 
     // Getting from repository
